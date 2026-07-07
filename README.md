@@ -48,4 +48,18 @@ In production environments, **False Positives are highly unacceptable**. If an u
 * The trade-off is a drop in **Recall**, meaning the filter becomes conservative and lets tricky spam slip into the main inbox.
 
 ### 2. Decision Tree Depth Saturation
-Increasing `max_depth` from `25` to `50` yields solid optimization gains. However, scaling from `50` to `75` shows **identical performance metrics**. This
+Increasing `max_depth` from `25` to `50` yields solid optimization gains. However, scaling from `50` to `75` shows **identical performance metrics**. This indicates structural saturation; the feature space is cleanly separated, and further depth introduces zero computational advantage.
+
+### 3. Support Vector Machine Kernel Underfitting
+At `Gamma = 0.01`, the RBF kernel's radius of influence is too broad. The model suffers from severe underfitting and defaults completely to predicting the majority class ("Not Spam" / Ham), resulting in a **0.0000 F1-Score**. Tuning Gamma upward to `0.5` constructs a crisp high-dimensional boundary, matching top-tier performance.
+
+---
+
+## 🚀 Quick Start & Replication
+
+### 🛠️ Environment Setup
+Clone the repository and install the standard scientific Python dependencies:
+```bash
+git clone [https://github.com/MajidFQ/MultiModel-Spam-Classification.git](https://github.com/MajidFQ/MultiModel-Spam-Classification.git)
+cd MultiModel-Spam-Classification
+pip install -r requirements.txt
