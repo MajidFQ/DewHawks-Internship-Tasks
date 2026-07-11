@@ -6,8 +6,6 @@ The goal of this project is to implement the exact evaluation strategies outline
 
 ---
 
----
-
 ## 🔄 Methodology Breakdown: What the Paper Did vs. What We Did
 
 To validate the study's claims, we aligned our local engineering pipeline with the exact architectural footprints utilized by the authors:
