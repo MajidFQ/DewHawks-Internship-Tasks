@@ -6,6 +6,26 @@ The goal of this project is to implement the exact evaluation strategies outline
 
 ---
 
+---
+
+## 🔄 Methodology Breakdown: What the Paper Did vs. What We Did
+
+To validate the study's claims, we aligned our local engineering pipeline with the exact architectural footprints utilized by the authors:
+
+### 📄 What the Research Paper Did
+* **Software Ecosystem:** Performed empirical benchmarking using the **Weka ML Workbench** (a GUI-based Java data mining tool dominant in 2012).
+* **Algorithmic Engine:** Utilized the **J48 algorithm** for decision trees, which natively implements **C4.5** tree mechanics. This allows for multi-way attribute splitting based on Information Gain Ratio.
+* **Hyperparameter Controls:** Executed with baseline Weka engine constraints: default subtree-raising post-pruning, a strict minimum threshold of 2 instances per leaf node, and an ensemble envelope limited to exactly 10 base trees for the Random Forest classifier.
+* **Data Processing:** Evaluated 20 diverse, static datasets harvested from the UCI Machine Learning Repository.
+
+### 💻 What We Did (Local Replication)
+* **Software Ecosystem:** Engineered a modern, programmatically scalable script inside a **Python 3 / Google Colab** execution environment.
+* **Algorithmic Engine:** Leveraged production-grade packages from **Scikit-Learn** (`DecisionTreeClassifier` and `RandomForestClassifier`). Scikit-Learn natively optimizes the **CART** (Classification and Regression Trees) paradigm, constructing highly optimized *binary trees*.
+* **Hyperparameter Controls:** Explicitly configured our classifiers to match the historical baselines: we forced the splitting criterion to `entropy` (Information Gain), set `min_samples_leaf=2`, and restricted `n_estimators=10` to keep the structural complexity identical to the 2012 model parameters.
+* **Data Processing:** Isolated **Dataset 14 (Breast W)**, programmatically fetched the data via live UCI repository streaming endpoints, parsed missing metadata values (`?` attributes), and cleanly isolated features from target classifications to mirror the evaluation footprint.
+
+---
+
 ## 📊 Evaluation Baseline & Target
 The replication targets **Dataset 14 (Breast W / Breast Cancer Wisconsin)** from the paper, utilizing its specific data footprint (699 instances, 10 attributes) and testing methodologies.
 
